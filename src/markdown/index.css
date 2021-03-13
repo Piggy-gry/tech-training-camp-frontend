@@ -1,0 +1,51 @@
+.md-editor {
+  width: 100%;
+  height: 100%;
+  background: #323232;
+}
+
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.toolbar {
+  height: 50px;
+}
+
+.left {
+  width: 50%;
+  height: 88vh;
+  margin: 10px;
+}
+
+.right {
+  width: 50%;
+  height: 88vh;
+  margin: 10px;
+  background: #fbfbfb;
+  border: solid 1px rgb(133, 133, 133);
+  overflow: scroll;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.input-area {
+  width: 100%;
+  height: 100%;
+}
+
+.CodeMirror {
+  border: 2px solid #eee;
+  font-size: 13px;
+}
+
+.code-wrapper {
+  background-color: rgb(239,239,239);
+  padding: 10px;
+}
