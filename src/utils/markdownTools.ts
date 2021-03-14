@@ -276,7 +276,7 @@ function handleTitle(cm: any, level: number) {
 /**
  * 插入图片或普通链接
  */
-function handleLink(cm: any, isPicture: false) {
+function handleLink(cm: any, isPicture: boolean) {
     /**
      * 已经选中文本
      * --- 获取选中的文本和前后光标位置
