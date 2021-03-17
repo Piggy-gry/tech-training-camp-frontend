@@ -239,10 +239,6 @@ function handleTitle(cm: any, level: number) {
         if (preLine !== aftLine) return void 0
         if (!prePos) {
             cm.replaceRange(`${preAppend}${selectVal}\n`, head, anchor)
-            // cm.setCursor({ line: preLine, ch: 0 })
-            // cm.replaceSelection(`${preAppend}`)
-            // cm.setCursor({ line: preLine, ch: (preAppend + selectVal).length })
-            // cm.replaceSelection('\n')
         } else {
             const curLineVal = cm.getLine(preLine)
             const matchStr = curLineVal.substr(0, prePos)
@@ -273,6 +269,7 @@ function handleTitle(cm: any, level: number) {
     }
     cm.focus()
 }
+
 /**
  * 插入图片或普通链接
  */
@@ -317,6 +314,7 @@ function handleLink(cm: any, isPicture: boolean) {
     }
     cm.focus()
 }
+
 /**
  * 判断选中文本的光标是在文本开头还是结尾
  */
@@ -325,14 +323,7 @@ function judgePreOrAft(selectInfo: any) {
     ;(head.line > anchor.line || (head.line === anchor.line && head.ch > anchor.ch)) && ([head, anchor] = [anchor, head])
     return { head, anchor }
 }
-/**
- * 将html转换成pdf
- */
-function htmlToPDF(iframe: any) {
-    const window = iframe.contentWindow
-    window.focus()
-    window.print()
-}
+
 
 export default {
     handleTextStyle,
@@ -341,5 +332,4 @@ export default {
     handleLine,
     handleTitle,
     handleLink,
-    htmlToPDF,
 }
