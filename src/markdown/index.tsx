@@ -11,7 +11,6 @@ const marked = require("marked");
 
 function MarkdownEditor() {
     const [text, setText] = useState("");
-
     const [cmEditor, setCmEditor] = useState({});
 
     const codeMirrorOptions = {
@@ -52,8 +51,6 @@ function MarkdownEditor() {
                 <div className="left">
                     <CodeMirror className="input-area"
                                 onChange={_.debounce((editor: any, data: any, value: any) => {
-                                    // @ts-ignore
-
                                     setText(value)
                                 }, 300)}
                                 value={""}
@@ -64,10 +61,7 @@ function MarkdownEditor() {
                                 }}
                     />
                 </div>
-                <div className="right" id="right">
-                    {/*{marked(text)}*/}
-                    {/*<Right rawContent={text}/>*/}
-                </div>
+                <div className="right" id="right"></div>
             </main>
         </div>
     )
