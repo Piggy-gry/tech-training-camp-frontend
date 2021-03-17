@@ -18,12 +18,12 @@ function MarkdownEditor() {
         lineNumbers: true,
     };
 
-    useEffect((() => {
+    const reStyleNodes = (nodes: string) => {
         const ele = document.createElement('div');
-        ele.innerHTML = marked(text);
-        sessionStorage.setItem('mdText', text);
+        ele.innerHTML = nodes;
 
         if (text) {
+            // restyle "code"
             let elements = ele.getElementsByTagName('code');
             for (let i = 0; i < elements.length; i++) {
                 const element = elements[i];
@@ -36,8 +36,18 @@ function MarkdownEditor() {
                     }
                 }
             }
-            // @ts-ignore
-            document.getElementById('right').innerHTML = ele.innerHTML;
+            return ele.innerHTML;
+        }
+
+        return '';
+    }
+
+    useEffect((() => {
+        sessionStorage.setItem('mdText', text);
+        const right = document.getElementById('right');
+
+        if (text && right) {
+            right.innerHTML = reStyleNodes(marked(text));
         }
     }), [text])
 

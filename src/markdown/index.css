@@ -44,7 +44,6 @@ main {
 }
 
 .CodeMirror {
-  border: 2px solid #eee;
   font-size: 13px;
 }
 
@@ -57,7 +56,7 @@ main {
 
 .tools {
   margin-left: 10px;
-  width: 50%;
+  width: 49%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
