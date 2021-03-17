@@ -102,7 +102,7 @@ const ToolsBar = (
             {
                 tools.map(tool => {
                     return (
-                        <button className="tool-btn" onClick={tool.onClick}>
+                        <button key={tool.imgTitle} className="tool-btn" onClick={tool.onClick}>
                             <img src={tool.imgSrc} alt=" " title={tool.imgTitle} style={{width: '100%'}}/>
                         </button>
                     )
