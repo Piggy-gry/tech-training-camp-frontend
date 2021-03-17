@@ -2,8 +2,6 @@
  * markdown工具栏处理
  * 基于codemirror底层api实现
  */
-import regExpList from './regExpUtil'
-
 function handleTextStyle(cm: any, matchStr: string) {
     /**
      * 已经选中文本
@@ -26,8 +24,6 @@ function handleTextStyle(cm: any, matchStr: string) {
         let { line: aftLine, ch: aftPos } = anchor
         cm.getRange({ line: preLine, ch: prePos - changePos }, head) === matchStr && (preExist = true)
         cm.getRange(anchor, { line: aftLine, ch: aftPos + changePos }) === matchStr && (aftExist = true)
-        // aftExist && cm.replaceRange('', anchor, { line: aftLine, ch: aftPos + changePos })
-        // preExist && cm.replaceRange('', { line: preLine, ch: prePos - changePos }, head)
         let preStr = preExist ? '' : matchStr
         let aftStr = aftExist ? '' : matchStr
         prePos -= preExist ? changePos : 0
@@ -294,7 +290,7 @@ function handleLink(cm: any, isPicture: boolean) {
         let { line: preLine, ch: prePos } = head
         let aftLine = anchor.line
         if (preLine !== aftLine) return void 0
-        const isLinkStr = regExpList.httpUrl.test(selectVal)
+        const isLinkStr = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?$/.test(selectVal)
         let replaceStr = isLinkStr ? `[](${selectVal})` : `[${selectVal}]()`
         prePos += isLinkStr ? 1 : selectVal.length + 3
         if (isPicture) {
