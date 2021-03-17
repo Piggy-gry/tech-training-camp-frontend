@@ -52,7 +52,7 @@ function MarkdownEditor() {
                     <CodeMirror className="input-area"
                                 onChange={_.debounce((editor: any, data: any, value: any) => {
                                     setText(value)
-                                }, 300)}
+                                }, 100)}
                                 value={""}
                                 options={codeMirrorOptions}
                                 editorDidMount={(editor) => {
@@ -61,7 +61,7 @@ function MarkdownEditor() {
                                 }}
                     />
                 </div>
-                <div className="right" id="right"></div>
+                <div className="right" id="right" />
             </main>
         </div>
     )
