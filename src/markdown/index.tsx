@@ -10,7 +10,7 @@ import 'codemirror/mode/markdown/markdown'
 const marked = require("marked");
 
 function MarkdownEditor() {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(sessionStorage.getItem('mdText') || "");
     const [cmEditor, setCmEditor] = useState({});
 
     const codeMirrorOptions = {
@@ -21,6 +21,7 @@ function MarkdownEditor() {
     useEffect((() => {
         const ele = document.createElement('div');
         ele.innerHTML = marked(text);
+        sessionStorage.setItem('mdText', text);
 
         if (text) {
             let elements = ele.getElementsByTagName('code');
@@ -40,7 +41,6 @@ function MarkdownEditor() {
         }
     }), [text])
 
-
     return (
         <div className="md-editor">
             <header className="toolbar">
@@ -53,7 +53,7 @@ function MarkdownEditor() {
                                 onChange={_.debounce((editor: any, data: any, value: any) => {
                                     setText(value)
                                 }, 100)}
-                                value={""}
+                                value={text}
                                 options={codeMirrorOptions}
                                 editorDidMount={(editor) => {
                                     editor.setSize("100%", "100%");
