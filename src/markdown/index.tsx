@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import _ from "lodash";
+import {ToolsBar} from "./toolsBar"
 import {UnControlled as CodeMirror} from 'react-codemirror2'
 import './index.css'
 import 'codemirror/lib/codemirror.css';
@@ -11,22 +12,32 @@ const marked = require("marked");
 function MarkdownEditor() {
     const [text, setText] = useState("");
 
+    const [cmEditor, setCmEditor] = useState({});
+
     const codeMirrorOptions = {
         mode: 'markdown',
         lineNumbers: true,
     };
 
     useEffect((() => {
-        console.log(text)
+        const ele = document.createElement('div');
+        ele.innerHTML = marked(text);
+
         if (text) {
-            let elements = document.getElementsByTagName('code');
+            let elements = ele.getElementsByTagName('code');
             for (let i = 0; i < elements.length; i++) {
-                const parent = elements[i].parentElement;
-                if (!parent) {
-                    continue;
+                const element = elements[i];
+                const parent = element.parentElement;
+                if (parent) {
+                    if (parent.childNodes.length >= 2) {
+                        element.className = "code-wrapper";
+                    } else {
+                        parent.className = "code-wrapper";
+                    }
                 }
-                parent.className ="code-wrapper";
             }
+            // @ts-ignore
+            document.getElementById('right').innerHTML = ele.innerHTML;
         }
     }), [text])
 
@@ -34,7 +45,7 @@ function MarkdownEditor() {
     return (
         <div className="md-editor">
             <header className="toolbar">
-                header
+                <ToolsBar cm={cmEditor}/>
             </header>
 
             <main>
@@ -42,13 +53,15 @@ function MarkdownEditor() {
                     <CodeMirror className="input-area"
                                 onChange={_.debounce((editor: any, data: any, value: any) => {
                                     // @ts-ignore
-                                    document.getElementById('right').innerHTML =
-                                        marked(value);
+
                                     setText(value)
                                 }, 300)}
                                 value={""}
                                 options={codeMirrorOptions}
-                                editorDidMount={(editor) => editor.setSize("100%", "100%")}
+                                editorDidMount={(editor) => {
+                                    editor.setSize("100%", "100%");
+                                    setCmEditor(editor);
+                                }}
                     />
                 </div>
                 <div className="right" id="right">
