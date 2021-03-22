@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import _ from "lodash";
 import {ToolsBar} from "./toolsBar"
 import {UnControlled as CodeMirror} from 'react-codemirror2'
@@ -63,9 +63,9 @@ function MarkdownEditor() {
                                 onChange={_.debounce((editor: any, data: any, value: any) => {
                                     setText(value)
                                 }, 100)}
-                                value={text}
                                 options={codeMirrorOptions}
                                 editorDidMount={(editor) => {
+                                    editor.setValue(text);
                                     editor.setSize("100%", "100%");
                                     setCmEditor(editor);
                                 }}

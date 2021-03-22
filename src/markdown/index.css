@@ -34,8 +34,8 @@ main {
   padding: 20px;
   box-sizing: border-box;
   color: #333;
-  font-family: monospace, inherit, sans-serif;
-  font-size: 13px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;;
+  font-size: 14px;
 }
 
 .input-area {
@@ -67,3 +67,46 @@ main {
   height: 35px;
   text-align: center;
 }
+
+
+blockquote {
+  margin: 0;
+}
+blockquote::before {
+  content: '\00A0';
+  width: 20px;
+  height: 100%;
+  background-color: rgb(216, 218, 221);
+}
+
+blockquote p {
+  display: inline;
+  color: #7a7a7a;
+}
+
+
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border-color: #ddd;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: rgb(246, 248, 250);}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(246, 248, 250);
+  color: black;
+}
+
