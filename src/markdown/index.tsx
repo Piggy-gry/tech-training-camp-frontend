@@ -1,17 +1,17 @@
-import React, {useCallback, useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import _ from "lodash";
 import {ToolsBar} from "./toolsBar"
 import {UnControlled as CodeMirror} from 'react-codemirror2'
 import './index.css'
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/lib/codemirror.js';
-import 'codemirror/mode/markdown/markdown'
+import 'codemirror/mode/markdown/markdown';
 
 const marked = require("marked");
 
 function MarkdownEditor() {
     const [text, setText] = useState(sessionStorage.getItem('mdText') || "");
-    const [cmEditor, setCmEditor] = useState({});
+    const [cmEditor, setCmEditor] = useState();
 
     const codeMirrorOptions = {
         mode: 'markdown',
@@ -23,14 +23,13 @@ function MarkdownEditor() {
         ele.innerHTML = nodes;
 
         if (text) {
-            // restyle "code"
             let elements = ele.getElementsByTagName('code');
             for (let i = 0; i < elements.length; i++) {
                 const element = elements[i];
                 const parent = element.parentElement;
                 if (parent) {
                     if (parent.childNodes.length >= 2) {
-                        element.className = "code-wrapper";
+                        element.className = "inline-code-wrapper";
                     } else {
                         parent.className = "code-wrapper";
                     }
@@ -42,19 +41,29 @@ function MarkdownEditor() {
         return '';
     }
 
-    useEffect((() => {
+    const readFile = (files: any) => {
+        let file = files.target.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            // @ts-ignore
+            cmEditor.setValue(String(evt.target?.result));
+            setText((text) => String(evt.target?.result) || text)
+        }
+    }
+    useEffect(() => {
         sessionStorage.setItem('mdText', text);
         const right = document.getElementById('right');
 
         if (text && right) {
             right.innerHTML = reStyleNodes(marked(text));
         }
-    }), [text])
+    }, [text])
 
     return (
         <div className="md-editor">
             <header className="toolbar">
-                <ToolsBar cm={cmEditor}/>
+                <ToolsBar cm={cmEditor} cmText={text} uploadFile={readFile}/>
             </header>
 
             <main>

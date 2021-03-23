@@ -3,14 +3,16 @@ import './index.css'
 import CmTools from "../utils/markdownTools"
 
 type args = {
-    cm: any
+    cm: any,
+    cmText: string,
+    uploadFile: (files: any) => void
 }
 
 const ToolsBar = (
     props: args,
     ref: React.Ref<HTMLDivElement>,
 ) => {
-    const { cm } = props;
+    const { cm, cmText, uploadFile } = props;
 
     const imageRoot = './icon/tools/'
     const tools = [
@@ -93,18 +95,30 @@ const ToolsBar = (
             imgTitle: '引用',
             imgSrc: `${imageRoot}/quote.svg`,
             onClick: () => CmTools.handleUnorderedList(cm, '> ')
+        },
+        {
+            imgTitle: '下载Markdown文件',
+            imgSrc: `${imageRoot}/download.svg`,
+            onClick: () => CmTools.handleDownload(cmText)
+        },
+        {
+            imgTitle: 'upload',
+            imgSrc: `${imageRoot}/upload.svg`,
+            onClick: () => null
         }
     ];
-
 
     return (
         <div ref={ref} className="tools">
             {
+
                 tools.map(tool => {
                     return (
-                        <button key={tool.imgTitle} className="tool-btn" onClick={tool.onClick}>
-                            <img src={tool.imgSrc} alt=" " title={tool.imgTitle} style={{width: '100%'}}/>
-                        </button>
+                            <button key={tool.imgTitle} className="tool-btn" onClick={tool.onClick}>
+                                <img src={tool.imgSrc} alt=" " title={tool.imgTitle} style={{width: '100%'}}/>
+                                {tool.imgTitle === 'upload' &&
+                                <input type="file" id="upload" className="tool-btn upload" onChange={(files) => uploadFile(files)}/>}
+                            </button>
                     )
                 })
             }

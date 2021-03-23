@@ -321,6 +321,29 @@ function judgePreOrAft(selectInfo: any) {
 }
 
 
+/**
+ * 下载用户输入为Markdown文档
+ */
+const makeTextFile = function (text: string) {
+    const data = new Blob([text], {type: 'text/plain'});
+    return window.URL.createObjectURL(data);
+};
+
+function handleDownload(text: any) {
+    const link = document.createElement('a');
+    link.setAttribute('download', 'markdown.pdf');
+    link.href = makeTextFile(text);
+    document.body.appendChild(link);
+
+    window.requestAnimationFrame(function () {
+        const event = new MouseEvent('click');
+        link.dispatchEvent(event);
+        document.body.removeChild(link);
+    });
+
+}
+
+
 export default {
     handleTextStyle,
     handleOrderList,
@@ -328,4 +351,5 @@ export default {
     handleLine,
     handleTitle,
     handleLink,
+    handleDownload,
 }

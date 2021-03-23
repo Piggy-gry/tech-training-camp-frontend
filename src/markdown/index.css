@@ -47,13 +47,6 @@ main {
   font-size: 13px;
 }
 
-.code-wrapper {
-  background-color: rgb(239,239,239);
-  padding: 5px;
-  font-family: monospace, sans-serif;
-  font-size: 13px;
-}
-
 .tools {
   margin-left: 10px;
   width: 49%;
@@ -66,8 +59,39 @@ main {
   width: 35px;
   height: 35px;
   text-align: center;
+  position: relative;
 }
 
+.upload {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 99;
+  top: 0;
+  left: 0;
+}
+
+code {
+  font-family: monospace;
+  color: #404c58;
+}
+
+.inline-code-wrapper {
+  background-color:  rgb(246, 248, 250);
+  padding: 2px;
+  font-family: monospace, sans-serif;
+  font-size: 13px;
+  border: solid 1px #eae9e9;
+}
+
+.code-wrapper {
+  background-color:  rgb(246, 248, 250);
+  padding: 8px;
+  font-family: monospace, sans-serif;
+  font-size: 13px;
+  border: solid 1px #ddd;
+}
 
 blockquote {
   margin: 0;
