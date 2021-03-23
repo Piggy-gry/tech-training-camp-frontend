@@ -331,7 +331,7 @@ const makeTextFile = function (text: string) {
 
 function handleDownload(text: any) {
     const link = document.createElement('a');
-    link.setAttribute('download', 'markdown.pdf');
+    link.setAttribute('download', 'markdown.md');
     link.href = makeTextFile(text);
     document.body.appendChild(link);
 
