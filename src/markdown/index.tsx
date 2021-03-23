@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react";
 import _ from "lodash";
-import {ToolsBar} from "./toolsBar"
-import {UnControlled as CodeMirror} from 'react-codemirror2'
-import './index.css'
+import {ToolsBar} from "./toolsBar";
+import {UnControlled as CodeMirror} from 'react-codemirror2';
+import { DemoMarkdownText } from './demo';
+import './index.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/lib/codemirror.js';
 import 'codemirror/mode/markdown/markdown';
@@ -10,7 +11,7 @@ import 'codemirror/mode/markdown/markdown';
 const marked = require("marked");
 
 function MarkdownEditor() {
-    const [text, setText] = useState(sessionStorage.getItem('mdText') || "");
+    const [text, setText] = useState(sessionStorage.getItem('mdText') || DemoMarkdownText);
     const [cmEditor, setCmEditor] = useState();
 
     const codeMirrorOptions = {
