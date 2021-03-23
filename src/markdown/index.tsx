@@ -56,7 +56,7 @@ function MarkdownEditor() {
         sessionStorage.setItem('mdText', text);
         const right = document.getElementById('right');
 
-        if (text && right) {
+        if (right) {
             right.innerHTML = reStyleNodes(marked(text));
         }
     }, [text])
