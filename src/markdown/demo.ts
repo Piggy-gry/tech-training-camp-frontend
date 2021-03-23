@@ -6,7 +6,6 @@ export const DemoMarkdownText = '# 在线简易Markdown编辑器\n' +
     '- 支持Markdown文件上传下载；\n' +
     '- 支持外部链接、特殊符号；\n' +
     '- 支持识别和解析HTML标签；\n' +
-    '- 兼容主流的浏览器（IE8+）和Zepto.js，且支持iPad等平板设备；\n' +
     '\n' +
     '# Heading 1 link [Heading link](https://github.com/Piggy-gry/tech-training-camp-frontend)\n' +
     '## Heading 2 link [Heading link](https://github.com/Piggy-gry/tech-training-camp-frontend)\n' +
